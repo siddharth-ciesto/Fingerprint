@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FingerprintJS Example</title>
+    <script src="fp.min.js"></script>
+</head>
+<body>
+    <h1>FingerprintJS Example</h1>
+    <div id="fingerprint-result">Loading...</div>
+
+    <br>
+    <br>
+    <p>cb10b6c95ab01c894f6a9fb716e19a0a</p>
+
+    <script>
+        const fpPromise = FingerprintJS.load();
+        fpPromise
+            .then(fp => fp.get())
+            .then(result => {
+                const visitorId = result.visitorId;
+                console.log(visitorId);
+                document.getElementById('fingerprint-result').innerText = `Visitor ID: ${visitorId}`;
+            })
+            .catch(error => {
+                console.error('Error getting visitor identifier:', error);
+            });
+    </script>
+</body>
+</html>
